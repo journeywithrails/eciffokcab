@@ -1,0 +1,85 @@
+/* Typography Styles */
+ul.bullet-1 {padding-left: 0 !important;overflow: hidden;margin-left: 5px !important;}
+ul.bullet-1 li {list-style: none;padding-bottom: 3px !important;margin-bottom: 5px !important;padding-left: 33px !important;}
+ul.bullet-2, ul.bullet-3, ul.bullet-4, ul.bullet-5, ul.bullet-6, ul.bullet-7, ul.bullet-8, ul.bullet-9 {padding-left: 15px !important;overflow: hidden;margin-left: 5px !important;}
+ul.bullet-2 li, ul.bullet-3 li, ul.bullet-4 li, ul.bullet-5 li, ul.bullet-6 li, ul.bullet-7 li, ul.bullet-8 li, ul.bullet-9 li {list-style: none;padding-bottom: 3px !important;margin-bottom: 5px !important;padding-left: 22px !important;}
+#maincol ul.bullet-1, #maincol ul.bullet-2, #maincol ul.bullet-3, #maincol ul.bullet-4, #maincol ul.bullet-5, #maincol ul.bullet-6, #maincol ul.bullet-7, #maincol ul.bullet-8, #maincol ul.bullet-9 {background: url(../images/typo/list-divider.png) 0 100% repeat-x;}
+
+ul.bullet-1 li {background: url(../images/typo/bullet1.png) 5px 5px no-repeat;}
+ul.bullet-2 li {background: url(../images/typo/bullet2.png) 0 5px no-repeat;}
+ul.bullet-3 li {background: url(../images/typo/bullet3.png) 0 5px no-repeat;}
+ul.bullet-4 li {background: url(../images/typo/bullet4.png) 0 5px no-repeat;}
+ul.bullet-5 li {background: url(../images/typo/bullet5.png) 0 5px no-repeat;}
+ul.bullet-6 li {background: url(../images/typo/bullet6.png) 0 5px no-repeat;}
+ul.bullet-7 li {background: url(../images/typo/bullet7.png) 0 5px no-repeat;}
+ul.bullet-8 li {background: url(../images/typo/bullet8.png) 0 4px no-repeat;}
+ul.bullet-9 li {background: url(../images/typo/bullet9.png) 0 4px no-repeat;}
+
+pre {padding: 10px;overflow: auto;background: #F9F1ED;border-bottom: 1px solid #DCD7D4;border-right: 1px solid #DCD7D4;color: #AC3400;font-style: italic;}
+
+.quotes {background: url(../images/typo/blockquote.png) 0 100% repeat-x;border-bottom: 1px solid #E5E5E5;border-right: 1px solid #E5E5E5;}
+blockquote {display: block;background: url(../images/typo/blockquote-start.png) 10px 5px no-repeat;padding: 0px 20px 0 48px;margin: 20px 0;width: auto;color: #666;border: 0;font-style: italic;}
+blockquote p {padding: 0 32px 0 0;margin-top: 0;background: url(../images/typo/blockquote-last.png) 100% 100% no-repeat;}
+
+.component-header {margin-top: 10px;background: url(../images/typo/list-divider.png) 0 100% repeat-x;}
+#main-body .componentheading {font-size: 120%;text-transform: uppercase;height: 30px; padding: 5px 0 5px 38px;}
+.style1 #main-body .componentheading {background: url(../images/style1/mainbody/style-h3.png) no-repeat;}
+.style2 #main-body .componentheading {background: url(../images/style2/mainbody/style-h3.png) no-repeat;}
+.style3 #main-body .componentheading {background: url(../images/style3/mainbody/style-h3.png) no-repeat;}
+.style4 #main-body .componentheading {background: url(../images/style4/mainbody/style-h3.png) no-repeat;}
+.style5 #main-body .componentheading {background: url(../images/style5/mainbody/style-h3.png) no-repeat;}
+.style6 #main-body .componentheading {background: url(../images/style6/mainbody/style-h3.png) no-repeat;}
+
+.important {border: 1px solid #E5E5E5;background: url(../images/typo/important.png) repeat-x 0 100%;padding: 15px;margin: 25px 0 10px 0;position: relative;}
+span.important-title {background: #fff;color: #376976;position: absolute;display: block;top: -0.8em;left: 10px;padding: 3px 8px;font-size: 120%;}
+
+span.number-square, span.number-circle {color: #666;display: block;font-size: 170%;float: left;text-align: center;margin-right: 10px;padding-top: 2px;height:32px; width: 32px;padding-bottom:10px;line-height:25px;}
+span.number-square {background: url(../images/typo/number-square.png) no-repeat;}
+span.number-circle {background: url(../images/typo/number-circle.png) no-repeat;}
+
+span.highlight {color: #AC3400;background: #f9f1ed;font-style: italic;}
+span.highlight-bold {font-size: 120%;font-weight: bold;line-height:150%;}
+
+p.marker {padding: 10px;border-top: 1px solid #ECECEC;border-bottom: 1px solid #ECECEC;}
+
+p.dropcap {background: url(../images/typo/list-divider.png) 0 100% repeat-x;padding-bottom: 10px;}
+span.dropcap {font-size: 400%;margin: 0px 4px 0 0;line-height: 100%;color: #333;float: left;display: block;}
+
+div.highlight1 {background: #f8f8f8 url(../images/typo/highlight1.jpg) 0 0 no-repeat;border-bottom: 1px solid #E5E5E5;border-right: 1px solid #E5E5E5; padding: 15px 15px 0 35px; margin: 15px 0;}
+div.highlight2 {padding: 15px 15px 0 35px; margin: 15px 0;}
+.style1 div.highlight2 {background: #EEF4F4 url(../images/typo/highlight2-1.jpg) 0 0 no-repeat;border-bottom: 1px solid #D6DFE4;border-right: 1px solid #D6DFE4;}
+.style2 div.highlight2 {background: #FFFAF1 url(../images/typo/highlight2-2.jpg) 0 0 no-repeat;border-bottom: 1px solid #F4EDDB;border-right: 1px solid #F4EDDB;}
+.style3 div.highlight2 {background: #EFEFEF url(../images/typo/highlight2-3.jpg) 0 0 no-repeat;border-bottom: 1px solid #E6E6E6;border-right: 1px solid #E6E6E6;}
+.style4 div.highlight2 {background: #EEF4F4 url(../images/typo/highlight2-4.jpg) 0 0 no-repeat;border-bottom: 1px solid #D6DFE4;border-right: 1px solid #D6DFE4;}
+.style5 div.highlight2 {background: #F3F3F3 url(../images/typo/highlight2-5.jpg) 0 0 no-repeat;border-bottom: 1px solid #E7E7E7;border-right: 1px solid #E7E7E7;}
+.style6 div.highlight2 {background: #F7F6F1 url(../images/typo/highlight2-6.jpg) 0 0 no-repeat;border-bottom: 1px solid #ECE4D7;border-right: 1px solid #ECE4D7;}
+
+span.inset-left {float: left;margin-right: 15px;}
+span.inset-right {float: right;margin-left: 15px;}
+span.inset-right-title, span.inset-left-title {background: #fff;color: #AC3400;position: absolute;display: block;top: -15px;left: 10px;padding: 3px 8px;font-size: 100%;font-weight: bold;}
+span.inset-left, span.inset-right {display: block;padding: 12px 8px 8px 8px;width: 20%;font-size: 100%;font-style: italic;margin-top: 25px;position: relative;border: 1px solid #E5E5E5;background: url(../images/typo/important.png) repeat-x 0 100%;color: #333;text-align: center;}
+
+div.attention, div.alert,  div.notice, div.download, div.approved, div.media, div.note, div.cart, div.camera, div.doc {display: block;margin: 15px 0;}
+div.attention .icon, div.alert .icon,  div.notice .icon, div.download .icon, div.approved .icon, div.media .icon, div.note .icon, div.cart .icon, div.camera .icon, div.doc .icon {display: block;padding: 8px 10px 8px 36px;margin: 15px 0;}
+div.alert {color: #D0583F;background: url(../images/typo/alert.png) 0 100% repeat-x;border-bottom: 1px solid #F8C9BB;border-right: 1px solid #F8C9BB;}
+div.alert .icon {background: url(../images/typo/alert-icon.png) 10px 10px no-repeat;}
+div.attention {color: #E1B42F;background: url(../images/typo/attention.png) 0 100% repeat-x;border-bottom: 1px solid #E4E4D5;border-right: 1px solid #E4E4D5;}
+div.attention .icon {background: url(../images/typo/attention-icon.png) 10px 10px no-repeat;}
+div.notice {color: #6187B3;background: url(../images/typo/notice.png) 0 100% repeat-x;border-bottom: 1px solid #C7CDDA;border-right: 1px solid #C7CDDA;}
+div.notice .icon {background: url(../images/typo/notice-icon.png) 10px 10px no-repeat;}
+div.download {color: #666666;background: url(../images/typo/download.png) 0 100% repeat-x;border-bottom: 1px solid #D3D3D3;border-right: 1px solid #D3D3D3;}
+div.download .icon {background: url(../images/typo/download-icon.png) 10px 10px no-repeat;}
+div.approved {color: #6CB656;background: url(../images/typo/approved.png) 0 100% repeat-x;border-bottom: 1px solid #C1CEC1;border-right: 1px solid #C1CEC1;}
+div.approved .icon {background: url(../images/typo/approved-icon.png) 10px 10px no-repeat;}
+div.media {color: #8D79A9;background: url(../images/typo/media.png) 0 100% repeat-x;border-bottom: 1px solid #DBE1E6;border-right: 1px solid #DBE1E6;}
+div.media .icon {background: url(../images/typo/media-icon.png) 10px 10px no-repeat;}
+div.note {color: #B76F38;background: url(../images/typo/note.png) 0 100% repeat-x;border-bottom: 1px solid #E6DAD2;border-right: 1px solid #E6DAD2;}
+div.note .icon {background: url(../images/typo/note-icon.png) 10px 10px no-repeat;}
+div.cart {color: #559726;background: url(../images/typo/cart.png) 0 100% repeat-x;border-bottom: 1px solid #D3D3D3;border-right: 1px solid #D3D3D3;}
+div.cart .icon {background: url(../images/typo/cart-icon.png) 10px 10px no-repeat;}
+div.camera {color: #55A0B4;background: url(../images/typo/camera.png) 0 100% repeat-x;border-bottom: 1px solid #C9D5D8;border-right: 1px solid #C9D5D8;}
+div.camera .icon {background: url(../images/typo/camera-icon.png) 10px 10px no-repeat;}
+div.doc {color: #666666;background: url(../images/typo/doc.png) 0 100% repeat-x;border-bottom: 1px solid #E5E5E5;border-right: 1px solid #E5E5E5;}
+div.doc .icon {background: url(../images/typo/doc-icon.png) 10px 10px no-repeat;}
+
+span.subline {display: block;font-size: 90%;margin-bottom: 5px;padding: 0px;margin-top: -15px;font-weight: bold;text-transform:uppercase;}

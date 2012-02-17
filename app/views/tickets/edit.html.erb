@@ -1,0 +1,22 @@
+<h1>Editing ticket</h1>
+
+<%- semantic_form_for @ticket, :url => ticket_path(@ticket.id) do |form| %>
+<%= form.inputs do %>
+<%= form.input :subject %>
+
+<%= form.input :status, :as => :select, :collection => ["New", "In Progress", "Waiting for Customer", "Resolved", "Invoiced", "Waiting for Parts", "No Fix, Still here"] %>
+<%= form.input :problem_type, :as => :select, :collection => ["Virus", "TuneUp", "Hardware", "Software", "Other"] %>
+<%= form.input :memory, :as => :string, :label => "Ram in MB" %>
+<%= form.input :upgradeoffered, :label => "Offered Upgrade - or check this if not applicable" %>
+<%= form.input :removeav, :label => "Okay to Remove Antivirus?" %>
+<%= form.input :isapproved, :label => "Is work approved to proceed?" %>
+<%= form.input :password, :label => "Does the computer need a password?" %>
+<%= form.input :category, :as => :radio, :collection => ["Redmond", "Kirkland", "Bellevue", "Online"] %>
+<%= form.input :cancelled, :label => "Job Cancelled - No Fix, No Pay" %>
+
+<%- end %>
+
+<%= form.buttons %>
+<%- end %>
+
+

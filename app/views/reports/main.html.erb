@@ -1,0 +1,236 @@
+<%= javascript_include_tag 'datetimepicker_css.js' %>
+
+<h3>Reports</h3>
+
+<%= link_to "Invoice Dump to CSV", "/invoices/200.csv", :class => "fancybutton" %>
+<%= link_to "Customer Dump to CSV", "/customers/200.csv", :class => "fancybutton" %>
+
+
+<br/><br/><br/>
+<%= form_tag(action = "/invoices/10/line_items.csv", :method => "get") do %>
+  <div class="field">
+        <label for="demo1">Please enter start date here: </label>
+        <input type="Text" id="demo1" name="start_date" maxlength="25" size="25"/>
+        <img src="images2/cal.gif" onclick="javascript:NewCssCal('demo1','yyyymmdd','arrow')" style="cursor:pointer"/>
+  </div>
+
+  <div class="field">
+        <label for="demo1">Please enter end date here: </label>
+        <input type="Text" id="demo2" name="end_date" maxlength="25" size="25"/>
+        <img src="images2/cal.gif" onclick="javascript:NewCssCal('demo2','yyyymmdd','arrow')" style="cursor:pointer"/>
+  </div>
+
+  <div>
+    <%= label_tag(:paidonly, "Paid only:") %>
+    <%= check_box_tag(:paidonly, "Paid only") %>
+  </div>
+
+  <div>
+    <%= submit_tag "Redmond Line Items CSV", :class => "fancybutton" %>
+  </div>
+<%end%>
+
+<div style="float:left; width:450px;">
+  <h3>Unpaid Invoices</h3>
+
+  Unpaid Amount: <%= number_to_currency(Invoice.unpaid_invoices_subtotal) %><br>
+  <table>
+
+    <tr>
+      <th>Number</th>
+      <th>Subtotal</th>
+      <th>Date</th>
+      <th>&nbsp;</th>
+    </tr>
+
+    <%- @unpaid_invoices.each do |invoice| %>
+
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= invoice.number %></td>
+          <td><%= invoice.subtotal %></td>
+          <td><%= invoice.date %></td>
+
+          <td><%= link_to 'Show', invoice %></td>
+        </tr>
+
+
+    <%- end %>
+  </table>
+  <%= will_paginate(@unpaid_invoices) %>
+  <h3>Recent 10 days of customers</h3>
+
+  <%- @tendayscustomers.each do |customer| %>
+      <%= link_to (customer.firstname + " " + customer.lastname), customer  %> - <%= customer.email %> - $<%= Customer.find_by_id(customer.id).invoices.sum("subtotal") %> <br>
+  <%- end %>
+
+
+  <h3>Customers By Money Spent</h3>
+
+  <ol>
+    <%- @customers_by_spend.each do |customer| %>
+        <li><%= link_to (customer.firstname + " " + customer.lastname), customer  %> <%= number_to_currency(customer.invoices.sum("subtotal")) %>  </li>
+    <%- end %>
+  </ol>
+
+
+
+  <h3>Month to Date - BizX</h3>
+
+  <table>
+
+    <tr>
+      <th>Number</th>
+      <th>Location</th>
+      <th>Subtotal</th>
+      <th>Hardware Cost</th>
+      <th>Date</th>
+      <th>&nbsp;</th>
+    </tr>
+
+    <%- @mtd_bizx_invoices.each do |invoice| %>
+
+
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= invoice.number %></td>
+          <td><%= invoice.category %></td>
+          <td><%= number_to_currency(invoice.subtotal) %></td>
+          <td><%= number_to_currency(invoice.hardwarecost) %></td>
+          <td><%= invoice.date %></td>
+
+          <td><%= link_to 'Show', invoice %></td>
+        </tr>
+
+
+    <%- end %>
+
+  </table>
+  Totals <%= Invoice.month_to_date_bizx_subtotal.to_i %>
+
+
+</div>
+
+
+
+<div>
+
+
+
+  <h3>Recent Monthly Subtotals</h3>
+  Month-to-Date subtotal(net): <%= number_to_currency(Invoice.month_to_date_subtotal) %><br>
+  Redmond Month-to-Date subtotal(net): <%= number_to_currency(Invoice.in_redmond.month_to_date_subtotal) %><br>
+  Estimated State Sales Tax for This Month: <%= number_to_currency(Invoice.month_to_date_subtotal * 0.095) %><br><br>
+  Rolling last 30 days subtotal: <%= number_to_currency(Invoice.subtotal_last_30_days) %><br>
+  Last Month Gross: <%= number_to_currency(Invoice.last_month_subtotal) %><br>
+  2 Months Ago Gross: <%= number_to_currency(Invoice.two_months_ago_subtotal) %><br>
+
+  <h3>Other Goodies</h3>
+  Parts Orders for last 6 days: <%= number_to_currency(Item.recent_parts_orders_subtotal) %><br>
+  Redmond Last Month Subtotal <%= number_to_currency(Invoice.last_month_redmond_subtotal) %> <br>date ranges from <%= ((Time.now-(Time.now.day).day)-1.month)+4.day %> to date<%= Time.now-(Time.now.day).day %><br><br>
+  Redmond Month To Date Subtotal <%= number_to_currency(Invoice.month_to_date_redmond_subtotal) %> <br>date ranges from <%= Time.now-(Time.now.day).day %> to date<%= Time.now %><br><br>
+
+
+
+
+</div>
+
+
+<div >
+  <h3>Last Month Redmond Invoices</h3>
+  <% redsub = 0 %>
+  <% redsub2 = 0 %>
+  <table>
+
+    <tr>
+      <th>Number</th>
+      <th>Location</th>
+      <th>Subtotal</th>
+      <th>Hardware Cost</th>
+      <th>Date</th>
+      <th>&nbsp;</th>
+    </tr>
+
+    <%- @last_month_redmond_invoices.each do |invoice| %>
+        <% redsub = redsub + invoice.subtotal %>
+        <% if invoice.hardwarecost != nil then redsub2 = redsub2 + invoice.hardwarecost end %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= invoice.number %></td>
+          <td><%= invoice.category %></td>
+          <td><%= number_to_currency(invoice.subtotal) %></td>
+          <td><%= number_to_currency(invoice.hardwarecost) %></td>
+          <td><%= invoice.date %></td>
+
+          <td><%= link_to 'Show', invoice %></td>
+        </tr>
+
+
+    <%- end %>
+
+  </table>
+  Totals <%= number_to_currency(redsub) %> Hardware Cost <%= number_to_currency(redsub2) %>
+
+  <p>
+  <table>
+
+    <tr>
+      <th>Number</th>
+      <th>Status</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th>Opened For</th>
+    </tr>
+
+    <%- @resolved_tickets.each do |ticket| %>
+
+        <tr class="<%= cycle("even", "odd") %>">
+          <td><%= ticket.id %></td>
+          <td><%= ticket.status %></td>
+          <td><%= ticket.created_at %></td>
+          <td><%= ticket.updated_at %></td>
+          <td><%= distance_of_time_in_words(ticket.created_at, ticket.updated_at) %></td>
+
+        </tr>
+
+
+    <%- end %>
+
+  </table>
+
+  </p>
+
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+    $(function() {
+        new Highcharts.Chart({
+            chart: {
+                renderTo: "tickets_chart"
+            },
+            title: {
+                text: "Tickets by Day"
+            },
+            xAxis: {
+                type: "datetime"
+            },
+            yAxis: {
+                title: {
+                    text: "Tickets"
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    return Highcharts.dateFormat("%B %e, %Y", this.x) + ': ' +
+                            "$" + Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            series: [
+                {
+                    pointInterval: <%= 1.day * 1000 %>,
+                    pointStart: <%= 3.weeks.ago.to_i * 1000 %>,
+                    data: <%= (3.weeks.ago.to_date..Date.today).map { |date| }.inspect %>
+                }
+            ]
+        });
+    });
+</script>
+<div id="tickets_chart" style="width:560px; height:300px;"></div>

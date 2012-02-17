@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backoffice1</title>
+  <%= stylesheet_link_tag :all %>
+  <%= formtastic_stylesheet_link_tag %>
+
+  <link rel="stylesheet" href="http://drpcfix.com/templates/rt_infuse_j15/css/template.css" type="text/css" />
+  <link rel="stylesheet" href="http://drpcfix.com/templates/rt_infuse_j15/css/style3.css" type="text/css" />
+  <link rel="stylesheet" href="http://drpcfix.com/templates/rt_infuse_j15/css/typography.css" type="text/css" />
+  <link rel="stylesheet" href="http://drpcfix.com/templates/system/css/system.css" type="text/css" />
+  <link rel="stylesheet" href="http://drpcfix.com/templates/system/css/general.css" type="text/css" />
+  <link rel="stylesheet" href="http://drpcfix.com/templates/rt_infuse_j15/css/menu-fusion.css" type="text/css" />
+  <style type="text/css">
+    <!--
+
+	div.wrapper { margin: 0 auto; width: 982px;padding:0;}
+	body { min-width:982px;}
+	#inset-block-left { width:0px;padding:0;}
+	#inset-block-right { width:0px;padding:0;}
+	#maincontent-block { margin-right:0px;margin-left:0px;}
+	
+	.s-c-s .colmid { left:0px;}
+	.s-c-s .colright { margin-left:-0px;}
+	.s-c-s .col1pad { margin-left:0px;}
+	.s-c-s .col2 { left:0px;width:0px;}
+	.s-c-s .col3 { width:0px;}
+	
+	.s-c-x .colright { left:0px;}
+	.s-c-x .col1wrap { right:0px;}
+	.s-c-x .col1 { margin-left:0px;}
+	.s-c-x .col2 { right:0px;width:0px;}
+	
+	.x-c-s .colright { margin-left:-0px;}
+	.x-c-s .col1 { margin-left:0px;}
+	.x-c-s .col3 { left:0px;width:0px;}
+	
+    -->
+  </style>
+
+
+  <script type="text/javascript" src="http://drpcfix.com/includes/js/joomla.javascript.js"></script>
+
+  <script type="text/javascript" src="http://drpcfix.com/templates/rt_infuse_j15/js/rokfonts.js"></script>
+  <script type="text/javascript" src="http://drpcfix.com/templates/rt_infuse_j15/js/rokutils.js"></script>
+<script language="javascript">
+function toggle() {
+	var ele = document.getElementById("toggleText");
+	var text = document.getElementById("displayText");
+	if(ele.style.display == "block") {
+    		ele.style.display = "none";
+		text.innerHTML = "show";
+  	}
+	else {
+		ele.style.display = "block";
+		text.innerHTML = "hide";
+	}
+}
+</script>
+  <script type="text/javascript">
+
+		        window.addEvent('load', function() {
+					new Fusion('ul.menutop', {
+						pill: 1,
+						effect: 'slide and fade',
+						opacity: 1,
+						hideDelay: 500,
+						tweakInitial: {'x': -12, 'y': 2},
+        				tweakSubsequent: {'x': -12, 'y': -14},
+						menuFx: {duration: 400, transition: Fx.Transitions.Quint.easeOut},
+						pillFx: {duration: 400, transition: Fx.Transitions.Quint.easeOut}
+					});
+	            });
+		window.templatePath = '/templates/rt_infuse_j15';
+		window.uri = '';
+		window.currentStyle = 'style3';
+
+window.addEvent('domready', function() {
+		var modules = ['side-mod', 'showcase-panel', 'moduletable', 'article-rel-wrapper'];
+		var header = ['h3','h2','h1'];
+		RokBuildSpans(modules, header);
+	});
+  </script>
+
+  <%= javascript_include_tag :defaults %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+	<div id="header">
+		<div class="wrapper">
+			<div class="padding">
+
+				<!--Begin Logo-->
+								<div class="logo-module">
+												<div class="moduletable">
+					<a href="/"><img align="left" alt="Dr PC Fix Logo" height="72" src="http://drpcfix.com/images/stories/logo.png" width="195" /></a> &nbsp; &nbsp;&nbsp; <a href="http://drpcfix.com/company/guarantee.html"><img alt="Dr PC Fix Satisfaction Guarantee" height="85" src="http://drpcfix.com/images/stories/satisfaction-guarantee.png" width="96" /></a>		</div>
+	
+									</div>
+								<!--End Logo-->
+								<div id="top-right">		<div class="moduletable">
+
+							<div class="module">
+			<div>
+				<div>
+					<div>
+											<p style="text-align: right;"><img src="http://drpcfix.com/images/call-now.png" alt="" /></p>
+<p style="text-align: right;"><a href="http://drpcfix.com/troys-blog.html">BLOG</a> | <a href="http://drpcfix.com/about-us.html">ABOUT US</a>&nbsp; | <a href="http://drpcfix.com/store-locator.html">STORE&nbsp;LOCATIONS</a></p>
+
+<p>&nbsp;</p>					</div>
+				</div>
+			</div>
+		</div>
+			</div>
+	</div>
+
+								<!--Begin Search-->
+								<!--End Search-->
+			</div>
+		</div>
+	</div>
+	<!--End Header-->
+	<div class="wrapper">	
+		<!--Begin Showcase-->
+				<div class="show-tm"><div class="show-tl"></div><div class="show-tr"></div></div>
+
+		<div class="show-m"><div class="show-l"><div class="show-r">
+			<!--Begin Horizontal Menu-->
+						<div id="horiz-menu" class="fusion">
+				<div class="wrapper">
+					<div class="padding">
+						<div id="horizmenu-surround">
+													<ul class="menutop level1" >
+			<li class="item1 root" >
+			<a class="orphan item bullet" href="/customers"  >
+
+			<span>
+		    			Customers			   
+			</span>
+		</a>
+		
+		
+</li>	
+			<li class="item47 root" >
+			<a class="orphan item bullet" href="/tickets?&search[status_does_not_contain]=Resolved"  >
+			<span>
+		    			Tickets		   
+			</span>
+
+		</a>
+		
+		
+</li>	
+			<li class="item295 root" >
+			<a class="orphan item bullet" href="/invoices"  >
+			<span>
+		    			Invoices			   
+			</span>
+		</a>
+		
+		
+</li>	
+</li>	
+			<li class="item291 root" >
+			<a class="orphan item bullet" href="/parts"  >
+			<span>
+		    			Parts Order			   
+			</span>
+		</a>
+		
+		
+</li>	
+</li>	
+			<li class="item291 root" >
+			<a class="orphan item bullet" href="/reports"  >
+			<span>
+		    			Reports			   
+			</span>
+		</a>
+		
+		
+</li>	
+	</ul>
+												</div>
+					<div class="clr"></div>
+					</div>
+				</div>
+			</div>
+						<!--End Horizontal Menu-->
+
+			<!--Begin Showcase Modules-->
+									<!--End Showcase Modules-->
+		</div></div></div>
+		<div class="show-bm"><div class="show-bl"></div><div class="show-br"></div></div>
+				<!--End Showcase-->
+		<!--Begin Scroller-->
+				<!--End Scroller-->
+		<!--Begin Main Body-->
+		<div class="main-tm"><div class="main-tl"></div><div class="main-tr"></div></div>
+
+		<div class="main-m"><div class="main-l"><div class="main-r">
+			<div id="main-body">
+				<div id="main-content" class="x-c-x">
+				    <div class="colmask leftmenu "><div class="wrapper">				        <div class="colmid">
+				    	    <div class="colright">
+						       <!--Begin Main Column (col1wrap)-->   
+							    <div class="col1wrap">
+							        <div class="col1pad">
+							            <div class="col1">
+
+									        <div id="maincol">
+
+<!-- layouts/application.html.erb -->
+<div style="float:right;" id="user_nav">
+  <% if user_signed_in? %>
+    Signed in as <%= link_to current_user.email, "/users/edit" %>. in group <%= current_user.group %>, Not you?
+    <%= link_to "Sign out", destroy_user_session_path %>
+  <% else %>
+    <%= link_to "sign in", new_user_session_path %>
+  <% end %>
+</div>
+
+
+<%= yield %>
+</div>
+
+																    										</div>
+		    									</div>
+
+		    									<div class="clr"></div>
+		       																																</div>    
+										</div>
+							        </div>
+							    </div>
+							    <!--End Main Column (col1wrap)-->
+						        <!--Begin Left Column (col2)-->
+						         
+							    <!--End Left Column (col2)-->
+							    <!--Begin Right Column (col3)-->
+
+							     
+							    <!--End Right Column (col3)-->
+							</div>
+						</div>
+					</div></div>				</div>
+				<!--Begin Main Bottom-->
+					
+				<!--End Main Bottom-->
+			</div>
+		</div></div></div>
+
+		<!--End Main Body-->
+	</div>
+	<!--Begin Footer-->
+		<div id="footer-bg">
+		<div class="wrapper">
+			<div id="footer">
+								<div id="mainmodules4" class="spacer w99">
+										<div class="block full">
+
+							<div class="">
+		<div class="moduletable">
+			<div class="module-padding">
+								<p style="text-align: center;">Copyright &copy;2010 | Dr PC Fix.com | Dr PC&nbsp;Fix, LLC - Since 2003 <br />
+Kirkland:&nbsp;425.825.0222 |&nbsp; 13501 100th AVE&nbsp; NE, Suite 10, Kirkland&nbsp; WA 98034<br />
+
+Redmond:&nbsp;425.214.5233 | 8347 160th AVE&nbsp;NE, Redmond WA 98052<br />
+Bellevue:&nbsp;425-484-0911 |&nbsp;731 123rd AVE&nbsp;NE, Bellevue WA 98005<br>
+                                  Mail: 11410 NE 124th ST, #270, Kirkland 98034
+</p>			</div>
+		</div>
+	</div>
+	
+					</div>
+																			</div>
+
+			</div>
+			<div id="footer-bg2"></div><div id="footer-bg3"></div>
+
+		</div>
+	</div>
+		<!--End Footer-->
+<%= yield :scripts %>
+</body>
+</html>
+

@@ -1,0 +1,10 @@
+<ul>
+<% @line_items.each do |linerecord| %>
+  <li>
+    <td><%= linerecord.name %></td>
+  </li>
+<% end %>
+</ul>
+
+<br>
+<% @invoice.getsubtotal %>

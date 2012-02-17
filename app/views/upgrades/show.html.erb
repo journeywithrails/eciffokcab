@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pc desc:</b>
+  <%= @upgrade.pc_desc %>
+</p>
+
+<p>
+  <b>Pc age:</b>
+  <%= @upgrade.pc_age %>
+</p>
+
+<p>
+  <b>Operating system:</b>
+  <%= @upgrade.operating_system %>
+</p>
+
+<p>
+  <b>Memory:</b>
+  <%= @upgrade.memory %>
+</p>
+
+<p>
+  <b>Disk size:</b>
+  <%= @upgrade.disk_size %>
+</p>
+
+<p>
+  <b>Disk used percent:</b>
+  <%= @upgrade.disk_used_percent %>
+</p>
+
+<p>
+  <b>Av software:</b>
+  <%= @upgrade.av_software %>
+</p>
+
+<p>
+  <b>Backups:</b>
+  <%= @upgrade.backups %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @upgrade.customer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_upgrade_path(@upgrade) %> |
+<%= link_to 'Back', upgrades_path %>

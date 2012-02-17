@@ -1,0 +1,17 @@
+
+
+<h3>Recent Monthly Subtotals</h3>
+Month-to-Date subtotal(net): <%= number_to_currency(Invoice.month_to_date_subtotal) %><br>
+Redmond Month-to-Date subtotal(net): <%= number_to_currency(Invoice.in_redmond.month_to_date_subtotal) %><br>
+Estimated State Sales Tax for This Month: <%= number_to_currency(Invoice.month_to_date_subtotal * 0.095) %><br><br>
+Rolling last 30 days subtotal: <%= number_to_currency(Invoice.subtotal_last_30_days) %><br>
+Last Month Gross: <%= number_to_currency(Invoice.last_month_subtotal) %><br>
+2 Months Ago Gross: <%= number_to_currency(Invoice.two_months_ago_subtotal) %><br>
+
+<h3>Other Goodies</h3>
+Parts Orders for last 6 days: <%= number_to_currency(Item.recent_parts_orders_subtotal) %><br>
+Redmond Last Month Subtotal <%= number_to_currency(Invoice.last_month_redmond_subtotal) %> <br>date ranges from <%= ((Time.now-(Time.now.day).day)-1.month)+4.day %> to date<%= Time.now-(Time.now.day).day %><br><br>
+Redmond Month To Date Subtotal <%= number_to_currency(Invoice.month_to_date_redmond_subtotal) %> <br>date ranges from <%= Time.now-(Time.now.day).day %> to date<%= Time.now %><br><br>
+
+<h3>Ticket Status</h3>
+Open Tickets: <%= @open_tickets.count %>

@@ -1,0 +1,43 @@
+<h3>Parts Order Tracker</h3>
+<%= link_to 'New Item', new_item_path, :class => "fancybutton" %>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Entered</th>
+    <th>Tickt#</th>
+    <th>Parturl</th>
+    <th>Shipping</th>
+	<th>Price</th>
+    <th>Store</th>
+    <th>Bought</th>
+    <th>Tracking</th>
+    <th>Arrived</th>
+    <th></th>
+    <th></th>
+   
+  </tr>
+
+<% @items.each do |item| %>
+
+
+  <tr style="background-color:<%= if item.receivedon != nil then "gray" else "" end %>;">
+    <td><%= item.id %></td>
+    <td><%= I18n.l item.requestedon, :format => :short %></td>
+    <td><%= link_to item.ticketnum.to_i, ticket_path(item.ticketnum.to_i) %></td>
+    <td><a href="<%= item.parturl %>"><%= truncate(item.parturl, :length => 25) %></a></td>
+    <td><%= item.shipping %></td>
+	<td><%= number_to_currency(item.price) %></td>
+    <td><%= item.deststore %></td>
+    <td><%= item.orderedon %></td>
+    <td><a href="http://www.google.com/search?&q=<%= item.trackingnum  %>"><%= truncate(item.trackingnum, :length => 20)  %></a></td>
+    <td><%= item.receivedon %></td>
+    
+    <td><%= link_to 'Edit', edit_item_path(item), :class => "fancybutton" %></td>
+    <td>&nbsp;</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

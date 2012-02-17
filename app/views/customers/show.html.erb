@@ -1,0 +1,125 @@
+<%= link_to 'Home', customers_path %> > Customer Detail
+<br>
+<h1>View Customer Detail</h1>
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_customer_path(@customer), :class => "fancybutton" %>
+
+<div id="opentickets" style="float:right;">
+
+
+  <b>Lifetime Spend</b><br>
+  <%- lifetimespend = 0 %>
+  <%- for invoice in @customer.invoices.return_invoices  %>
+      <% lifetimespend += invoice.subtotal %>
+  <% end %>
+  <%= number_to_currency(lifetimespend) %>&nbsp;<br><br>
+
+
+  <b>Related Tickets</b><br>
+  <% counter = 1 %>
+  <% for ticket in @mytickets %>
+      <% counter = counter + 1 %>
+      <br>
+      <a  href="http://allinnetworks.com/index.php?option=com_acymailing&amp;gtask=sub&amp;task=optin&amp;hiddenlists=<%= if ticket.category == "Redmond" then "1,8" end %><%= if ticket.category == "Kirkland" then "1,2" end %>&amp;user[email]=<%= @customer.email %>&amp;user[name]=<%= (@customer.firstname + " " + @customer.lastname) %>"><%= if counter < 3 then "Signup" else "" end %></a>
+      <br>
+      <%= link_to ticket.id, ticket_path(ticket.id)%>
+      <%= ticket.created_at %>&nbsp;<br>
+      <%= ticket.category %>&nbsp;<br>
+      <%= ticket.subject %>&nbsp;
+      <%= ticket.status %>&nbsp;
+      <%= ticket.problem_type %>&nbsp;
+
+      <br><br>
+  <% end %>
+</div>
+
+<br>
+<br>
+<b>First Name:</b>
+<%= @customer.firstname %>
+
+<br>
+<b>Last Name:</b>
+<%= @customer.lastname %>
+
+<br>
+<b>Email:</b>
+<%= @customer.email %>
+
+<br>
+<b>Address:</b>
+<a href="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=<%= @customer.address %> <%= @customer.city %> <%= @customer.state %>"><%= @customer.address %></a>
+
+<br>
+<b>City:</b>
+<%= @customer.city %>
+<br>
+<b>State:</b>
+<%= @customer.state %>
+<br>
+<b>Zip:</b>
+<%= @customer.zip %>
+
+<br>
+<b>Phone:</b>
+<%= number_to_phone(@customer.phone) %>
+
+<br>
+<b>Mobile Phone:</b>
+<%= number_to_phone(@customer.mobile) %>
+<br>
+<br>
+
+
+
+<%= link_to 'New Invoice - New Window', new_invoice_path(:customer_id => @customer.id), :class => "fancybutton" %><br><br>
+<%= link_to 'New Ticket - New Window', new_ticket_path(:customer_id => @customer.id), :class => "fancybutton" %>
+
+<span align=center><h3>Customer Invoice History</h3></span>
+<div style="width: 50px; float: left;">ID</div>
+<div style="width: 100px; float: left;">Inv Number</div>
+<div style="width: 100px; float: left;">Paid Status</div>
+<div style="width: 100px; float: left;">Date</div>
+<div style="width: 100px; float: left;">Subtotal</div>
+<div style="width: 100px; float: left;">Category</div>
+<div style="width: 200px; float: left;">Controls</div>
+<br>
+<br>
+<%- for invoice in @myinvoices  %>
+    <div style="width: 50px; float: left;"><%= invoice.id %></div>
+    <div style="width: 100px; float: left;"><%= invoice.number %></div>
+    <div style="width: 100px; float: left;"><%= if invoice.paid == true then "Paid" else "Un-Paid" end %></div>
+    <div style="width: 100px; float: left;"><%= invoice.date %>&nbsp;</div>
+    <div style="width: 100px; float: left;"><%= number_to_currency(invoice.subtotal) %></div>
+    <div style="width: 100px; float: left;"><%= invoice.category %>&nbsp;</div>
+    <div style="width: 200px; float: left;"><%= link_to "View", invoice_path(invoice.id), :class => "fancybutton" %> <%= if current_user.group == "Admins" then link_to "- Destroy", invoice_path(invoice), :confirm => 'Are you sure?', :method => :delete end %></div>
+
+    <br>
+    <br>
+<%- end %>
+
+<hr>
+
+
+
+
+<table>
+  <tr>
+    <td>
+      <h4>Map View</h4>
+
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=12&markers=#{@customer.latitude}%2C#{@customer.longitude}" %>
+
+    </td>
+
+    <td>
+      <h4>Nearby Customers</h4>
+      <ul>
+        <% for customer in @customer.nearbys(1) %>
+            <li><%= link_to (customer.firstname + " " + customer.lastname + " - " + customer.address), customer %> (<%= number_with_precision(customer.distance,:precision => 2) %> miles)</li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+</table>

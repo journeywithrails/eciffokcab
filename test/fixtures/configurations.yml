@@ -1,0 +1,30 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  taxrate: 1
+  business_name: MyString
+  admin_user: MyString
+  admin_pass: MyString
+  invoice_footer: MyText
+
+two:
+  taxrate: 1
+  business_name: MyString
+  admin_user: MyString
+  admin_pass: MyString
+  invoice_footer: MyText
+
+# == Schema Information
+#
+# Table name: configurations
+#
+#  id             :integer         primary key
+#  taxrate        :integer
+#  business_name  :string(255)
+#  admin_user     :string(255)
+#  admin_pass     :string(255)
+#  invoice_footer :text
+#  created_at     :timestamp
+#  updated_at     :timestamp
+#
+

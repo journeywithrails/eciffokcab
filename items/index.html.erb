@@ -1,0 +1,43 @@
+<h1>Dr PC Fix - Parts Order Tracker</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Requestedon</th>
+    <th>Ticketnum</th>
+    <th>Parturl</th>
+    <th>Shipping</th>
+    <th>Deststore</th>
+    <th>Orderedby</th>
+    <th>Orderedon</th>
+    <th>Trackingnum</th>
+    <th>Receivedon</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |item| %>
+<% @tempvar = "0" %>
+<% if item.receivedon.size.to_i != @tempvar.to_i then @data1 = 'foo' end %>
+  <tr class="background<%= item.receivedon.size %>" >
+    <td><%= item.id %></td>
+    <td><%= item.requestedon %></td>
+    <td><%= item.ticketnum %></td>
+    <td><%= item.parturl %></td>
+    <td><%= item.shipping %></td>
+    <td><%= item.deststore %></td>
+    <td><%= item.orderedby %></td>
+    <td><%= item.orderedon %></td>
+    <td><%= item.trackingnum %></td>
+    <td><%= item.receivedon %></td>
+    <td><%= link_to 'Show', item %></td>
+    <td><%= link_to 'Edit', edit_item_path(item) %></td>
+    <td><%= link_to 'Delete', item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path %>

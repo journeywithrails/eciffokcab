@@ -1,0 +1,51 @@
+<h3>Invoice Manager</h3>
+<div style="float:right;">
+     <em>BizX MTD: <%= number_to_currency(Invoice.month_to_date_bizx_subtotal.to_i) %></em>
+</div>
+
+<% form_tag "/invoices", :method => 'get' do %>
+
+<p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :search => nil %>
+  </p>
+<% end %>
+
+
+<%= will_paginate(@invoices) %>
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Paid</th>
+    <th>Date</th>
+    <th>Date received</th>
+    <th>Subtotal</th>
+    <th>Audit</th>
+    <th>Timestamp</th>
+    <th>Check number</th>
+    <th>Saved</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @invoices.each do |invoice| %>
+  <tr class="<%= cycle("even", "odd") %>">
+    <td><%= invoice.number %></td>
+    <td><%= if invoice.paid == true then "Paid" else "Un-Paid" end %></td>
+    <td><%= invoice.date.to_s :short %></td>
+    <td><%= invoice.date_received %></td>
+    <td><%= number_to_currency(invoice.subtotal) %></td>
+    <td>&nbsp;</td>
+    <td><%= invoice.timestamp %></td>
+    <td><%= invoice.check_number %></td>
+    <td>&nbsp;</td>
+    <td><%= invoice.category %></td>
+    <td><%= link_to "View", invoice_path(invoice.id), :class => "fancybutton" %></td>
+    <td></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate(@invoices) %>
+<br />
+

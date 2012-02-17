@@ -1,0 +1,7 @@
+<h1>New invoice line item</h1>
+
+<%- semantic_form_for @line_item, :url => customer_invoice_line_items_path(@invoice.id) do |form| %>
+<%= form.inputs :name, :cost, :price, :quantity %>
+
+<%= form.buttons %>
+<%- end %>

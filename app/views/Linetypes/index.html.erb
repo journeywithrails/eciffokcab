@@ -1,0 +1,23 @@
+<h1>Listing linetypes</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @linetypes.each do |linetype| %>
+  <tr>
+    <td><%= linetype.type %></td>
+    <td><%= link_to 'Show', linetype %></td>
+    <td><%= link_to 'Edit', edit_linetype_path(linetype) %></td>
+    <td><%= link_to 'Destroy', linetype, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Linetype', new_linetype_path %>

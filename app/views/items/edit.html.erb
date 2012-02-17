@@ -1,0 +1,21 @@
+<h1>Editing item</h1>
+
+<%- semantic_form_for @item, :url => item_path(@item.id) do |form| %>
+<%= form.inputs do %>
+
+<%= form.input :ticketnum, :required => true %>
+<%= form.input :parturl, :required => true %>
+<%= form.input :price, :required => true %>
+<%= form.input :shipping, :required => true %>
+<%= form.input :deststore, :required => true %>
+
+<%= form.input :orderedon %>
+<%= form.input :trackingnum %>
+<%= form.input :receivedon %>
+<%- end %>
+
+<%= form.buttons %>
+<%- end %>
+
+
+

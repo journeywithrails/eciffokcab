@@ -1,0 +1,100 @@
+<%= link_to 'All Tickets', "/tickets/" %> > Ticket Detail
+<h1>Ticket Detail - <%= @ticket.subject %></h1>
+<p id="notice"><%= notice %></p>
+
+<br>
+<br>
+
+<div style="float:left; width:33%;">
+  <%= link_to 'Change', edit_ticket_path(@ticket.id), :class => "fancybutton" %><%= link_to 'PDF', "#{@ticket.id}.pdf", :class => "fancybutton" %><br><br>
+  
+  <b>Number:</b>
+  <%= @ticket.id %> <br>
+  <b>Category:</b>
+  <%= @ticket.category %> <br>
+
+  <b>Problem type:</b>
+  <%= @ticket.problem_type %><br>
+  <b>Created:</b>
+  <%= I18n.l @ticket.created_at %><br>
+ 
+  <b>Memory:</b>
+  <%= @ticket.memory %>MB | <%= if @ticket.upgradeoffered == true then "Upgrade Offered" else "Offer Upgrade**" end %><br>
+  
+   <b>Status:</b><%= @ticket.status %><br>
+    <b>Pre-Approved:</b>
+  <%= if @ticket.isapproved == true then "APPROVED" else "no" end %><br>
+  <b>Computer Password: </b><%= @ticket.password %><br>
+</div>
+
+<div style="float:left; width:33%;">
+  <b>Progress</b><br>
+  
+  <%- for comments in @ticket.comments %>
+   <%- end %>
+   
+   <b>1. Free Diagnostic:</b>
+   <%= if @ticket.progress_diagnose == "true" then "Yes" else "No" end %>
+  &nbsp;<br>
+  <b>2. Work Approved:</b>
+  <%= if @ticket.progress_approval == "true" then "Yes" else "No" end %> <br>
+  <b>3. Repair Completed:</b>
+  <%= if @ticket.progress_completed == "true" then "Yes" else "No" end %><br>
+  <b>&nbsp;</b>
+  &nbsp;<br>
+  <b>&nbsp;</b>
+  &nbsp;<br>
+    <b>&nbsp;</b>
+  &nbsp;
+ 
+</div>
+
+<div id="custinfo" style="float:left;width:33%;">
+  <%= if @ticket.progress_approval == "true" then link_to 'Make Invoice', new_invoice_path(:customer_id => @ticket.customer_id, :ticket_id => @ticket.id, :category => @ticket.category), :class => "fancybutton" else "Complete Ticket before invoicing" end %>
+
+ <%- for customer in @thiscustomer %>
+ <a class="fancybutton" href="http://allinnetworks.com/index.php?option=com_acymailing&amp;gtask=sub&amp;task=optin&amp;hiddenlists=<%= if @ticket.category == "Redmond" then "1,8" end %><%= if @ticket.category == "Kirkland" then "1,2" end %>&amp;user[email]=<%= customer.email %>&amp;user[name]=<%= (customer.firstname + " " + customer.lastname) %>">Signup</a>
+ 
+ <br><br><b>Customer:</b>
+<%= link_to (customer.firstname + " " + customer.lastname), customer_path(customer.id) %> <br>
+  <b>Email:</b>
+  <%= customer.email %><br>
+  <b>Address:</b>
+  <%= customer.address %><br>
+  <b>City:</b>
+  <%= customer.city %> <br>
+  <b>Phone:</b>
+  <%= number_to_phone(customer.phone) %><br>
+  <b>Mobile:</b>
+  <%= number_to_phone(customer.mobile) %><br>
+  
+  <%- end %>
+
+  <br>
+  
+</div>
+
+<div><br><br><br><br><br><br><br><br><br><br>
+Add new comment<br><br>
+
+<%- semantic_form_for @comment, :url => ticket_comments_path(@ticket.id) do |form| %>
+<%= form.inputs do %>
+<%= form.input :subject, :as => :select, :collection => ["Problem", "Diagnosis", "Contacted", "Approval", "Parts Order", "Parts Arrival",  "Upgrade", "Completed", "Other"], :label => "Update Type: "  %>
+<%= form.input :hidden %>
+<%= form.input :body, :as => :text, :input_html => { :rows => 6, :cols => 50  }  %>
+<%- end %>
+
+<%= form.buttons %>
+<%- end %>
+</div>
+<%- for comments in @ticket.comments %>
+<div style="width:20px;">&nbsp</div>
+<div class="sumhead2"><b>Comment Made At:</b> <%= I18n.l comments.created_at %> <b>by Tech:</b> <%= comments.tech %></div>
+<div class="sumhead2"><b>Subject:</b> <%= comments.subject %>&nbsp;</div>
+<div class="hiddencomment" style="background-color: yellow;"> <%= if comments.hidden == true then "Hidden" else "" end %> </div>
+<div class="sumhead1"><b>Message:</b> <%= sanitize simple_format(auto_link(strip_tags comments.body)) %> </div>
+
+<br>
+<br>
+<%- end %>
+

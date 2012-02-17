@@ -1,0 +1,106 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'Back', customer_path(@customer.id) %>
+
+
+
+<p>
+  <b>Customer:</b>
+<%= @customer.firstname %>  <%= @customer.lastname %> <br>
+  <b>Email:</b>
+  <%= @customer.email %><br>
+  <b>Address:</b>
+  <%= @customer.address %><br>
+  <b>City:</b> 
+  <%= @customer.city %> <br>
+  <b>Phone:</b> 
+  <%= number_to_phone(@customer.phone) %><br>
+</p>
+
+
+  <div id="newlineitemform" style="float:right;">
+Add new line item to invoice<br><br>
+<%- semantic_form_for @line_item, :url => customer_invoice_line_items_path(@customer.id, @invoice.id) do |form| %>
+<%= form.inputs :name, :cost, :price, :quantity %>
+
+<%= form.buttons %>
+<%- end %>
+
+  </div>
+
+  <b>Invoice Number:</b>
+  <%= @invoice.number %> <%= link_to 'Change', edit_customer_invoice_path(@customer.id) %>
+<br>
+  <b>Invoice Date:</b>
+  <%= @invoice.date %>
+<br>
+  <b>Is Paid:</b>
+  <%= @invoice.paid %>
+<br>
+  <b>Date received:</b>
+  <%= @invoice.date_received %>
+<br>
+  <b>Notax:</b>
+  <%= @invoice.notax %>
+<br>
+  <b>tax:</b>
+  <%= @invoice.tax %>
+<br>
+  <b>Subtotal:</b>
+  <%= @invoice.subtotal %>
+<br>
+  <b>Total:</b>
+  <%= @invoice.total %>
+<br>
+  <b>Check number:</b>
+  <%= @invoice.check_number %>
+
+
+<h3 align=center>Invoice Summary</h3>
+
+ <style type="text/css"> 
+    <!--
+ 
+	.sumhead1 { width:300px;padding:0;float:left;}
+	.sumhead2 { width:100px;padding:0;float:left;}
+	
+    -->
+  </style> 
+
+<div class="sumhead2">&nbsp</div>
+<div class="sumhead1"><strong>Description</div>
+<div class="sumhead2">Quantity</div>
+<div class="sumhead2">Price</strong></div>
+<div class="sumhead2">&nbsp</div>
+<br><br>
+
+<%- for line_items in @invoice.line_items %>
+<div class="sumhead2">&nbsp</div>
+<div class="sumhead1"><%= line_items.name %> </div>
+<div class="sumhead2"><%= line_items.quantity %> </div>
+<div class="sumhead2"><%= line_items.price %></div>
+<div class="sumhead2"><%= link_to '<- Remove', customer_invoice_line_item_path(@invoice.customer_id, @invoice.id, line_items.id), :method => :delete %></div>
+<br>
+<%- end %>
+
+<p>&nbsp;</p>
+  <div id="subtotalbox" style="float:right;" >
+    Subtotal: 
+    <%= number_to_currency(@invoice.subtotal) %>
+    <br>
+    Tax: 
+    <% taxrate = 0.095 %>
+    <%= number_to_currency(@invoice.tax) %>
+    <br>
+
+    <strong>Total: 
+    <%= number_to_currency(@invoice.total) %>
+    </strong>
+  </div>
+
+
+<div style="float: left;">
+ 
+<em>  <%= if current_user.group == "Admins" then link_to 'Delete Invoice', customer_invoice_path(@customer.id), :confirm => 'Are you sure?', :method => :delete end %></em>
+
+</div>
+

@@ -1,0 +1,6 @@
+<h1>Locator#index</h1>
+<div id="map-container" style="padding: 20px">
+  <div id="map" style="color: white; width: 800px; border: 3px solid black;border-radius: 5px; box-shadow: 2px 2px 3px gray; -moz-box-shadow: 2px 2px 3px gray;">
+    <%= gmaps({"markers" => {"data" => @json},  "map_options" => { "detect_location" => true, "center_on_user" => true, "zoom" => 10 }}) %>
+
+  </div>

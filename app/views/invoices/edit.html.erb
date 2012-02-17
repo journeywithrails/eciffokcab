@@ -1,0 +1,23 @@
+<h1>Editing invoice</h1>
+
+<%- semantic_form_for @invoice, :url => invoice_path(@invoice.id) do |form| %>
+<%- form.inputs do %>
+
+<%= form.input :date, :as => :string %>
+<%= form.input :number, :as => :string %>
+<%= form.input :bizx %>
+
+<%= if current_user.group == "Admins" then form.input :paid end %>
+<%= form.input :notax, :label => "Do Not Tax this invoice" %>
+<%= form.input :date_received %>
+<%= form.input :ticket_id, :label => "Related Ticket Number (if any)" %>
+<%= form.input :category, :label => "Ticket Location (if any)" %>
+<%= form.input :note, :label => "Tech Notes (only if no ticket)", :input_html => { :rows => 10, :cols => 40 } %>
+
+<%= form.input :payment_type, :as => :select, :collection => ["Visa", "Mastercard", "BizX", "Check", "Cash", "Other"] %>
+<%= form.input :check_number, :label => "Check/Visa last 4/BizX" %>
+<%= form.input :payer_name, :label => "Payer Name" %>
+<%- end %>
+
+<%= form.buttons %>
+<%- end %>

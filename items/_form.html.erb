@@ -1,0 +1,54 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field"> 
+    <label for="item_requestedon">Requesting At</label><br /> 
+    <input id="item_requestedon" name="item[requestedon]" value="<%= Time.now%>" size="30" type="text" /> 
+  </div>
+
+  <div class="field">
+    <%= f.label :ticketnum %><br />
+    <%= f.text_field :ticketnum %>
+  </div>
+  <div class="field">
+    <%= f.label :parturl %><br />
+    <%= f.text_field :parturl %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping %><br />
+    <%= f.text_field :shipping %>
+  </div>
+  <div class="field">
+    <%= f.label :deststore %><br />
+    <%= f.text_field :deststore %>
+  </div>
+  <div class="field">
+    <%= f.label :orderedby %><br />
+    <%= f.text_field :orderedby %>
+  </div>
+  <div class="field">
+    <%= f.label :orderedon %><br />
+    <%= f.text_field :orderedon %>
+  </div>
+  <div class="field">
+    <%= f.label :trackingnum %><br />
+    <%= f.text_field :trackingnum %>
+  </div>
+  <div class="field">
+    <%= f.label :receivedon %><br />
+    <%= f.text_field :receivedon %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

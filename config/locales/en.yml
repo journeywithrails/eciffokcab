@@ -1,0 +1,14 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  date:
+    formats:
+      default: "%m-%d-%y"
+      short: "%m-%d-%y"
+      long: "%m-%d-%y"
+  time:
+    formats:
+      default: "%a %m-%d-%y %I:%m %p"
+      short: "%m-%d-%y"
+      long: "%m-%d-%y"

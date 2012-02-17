@@ -1,0 +1,19 @@
+<h1>New ticket</h1>
+
+<%- semantic_form_for @ticket, :url => tickets_path, :customer_id => @ticket.customer_id do |form| %>
+<%= form.inputs do %>
+<%= form.input :subject %>
+<%= form.input :customer_id, :as => :radio, :collection => { (@customer.firstname + " " + @customer.lastname) => @customer.id } %>
+<%= form.input :status, :as => :select, :collection => ["New", "In Progress", "Resolved", "Invoiced", "Waiting for Parts", "NFNP", "No Fix, Still here"] %>
+<%= form.input :problem_type, :as => :select, :collection => ["Virus", "TuneUp", "Hardware", "Software", "Other"] %>
+<%= form.input :referredby, :as => :radio, :collection => ["Google", "Sign", "Friend", "Other"], :required => true %>
+<%= form.input :removeav, :label => "Okay to Remove Antivirus?" %>
+<%= form.input :isapproved, :label => "Is work approved to proceed?" %>
+<%= form.input :password, :label => "Does the computer need a password?" %>
+<%= form.input :category, :as => :radio, :collection => ["Redmond", "Kirkland", "Bellevue", "Online"] %>
+<%- end %>
+
+<%= form.buttons %>
+<%- end %>
+
+<%= @ticket.customer_id %>

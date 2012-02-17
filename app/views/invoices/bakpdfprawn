@@ -1,0 +1,43 @@
+pdf.text  "@customer.firstname    @customer.lastname"
+   pdf.text "Email: 
+   pdf.text "@customer.email  "
+   pdf.text "Address: "
+   pdf.text "@customer.address  "
+   pdf.text "City: "
+   pdf.text "@customer.city   "
+   pdf.text "Phone: "
+   pdf.text "number_to_phone(@customer.phone)  "
+
+   pdf.text "Invoice Number: #{@invoice.number }"
+ 
+ pdf.text   "Invoice Date:    #{@invoice.date} "
+ 
+   pdf.text "tax: #{@invoice.tax} "
+ 
+   pdf.text "Subtotal: #{@invoice.subtotal} "
+ 
+   pdf.text "Total: #{@invoice.total} "
+ pdf.move_down(10)
+
+pdf.text  "Invoice Summary"
+
+line_items = @invoice.line_items.map do |line_item|
+
+#for line_items in @invoice.line_items old code from html view
+[
+line_item.name,
+line_item.quantity,
+line_item.price
+ ]
+end 
+pdf.move_down(10)
+
+pdf.table line_items, :border_style => :grid,
+  :row_colors => ["FFFFFF","DDDDDD"],
+  :headers => ["Product", "Qty", "Unit Price"],
+  :align => { 0 => :left, 1 => :right, 2 => :right }
+
+pdf.text "Subtotal: #{number_to_currency(@invoice.subtotal)}", :size => 16, :style => :bold
+pdf.text "Tax: #{number_to_currency(@invoice.tax)}", :size => 16, :style => :bold
+pdf.text "Invoice Total: #{number_to_currency(@invoice.total)}", :size => 16, :style => :bold
+

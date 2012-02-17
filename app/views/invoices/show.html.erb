@@ -1,0 +1,146 @@
+<p id="notice"><%= notice %></p>
+<%= link_to 'Home', "/customers" %> > <%= link_to 'Customer', customer_path(@invoice.customer_id) %> > Invoice Detail
+
+<img src="/images/<%= if @invoice.paid == true then "paid" else "unpaid" end %>.png" align="right" width="200px" height="122px">
+
+<p>
+ <%- for customer in @thiscustomer %>
+ <b>Name:</b> <%= link_to (customer.firstname + " " + customer.lastname), customer_path(customer.id) %> <br>
+  <b>Email:</b>
+  <%= customer.email %><br>
+  <b>Address:</b>
+  <%= customer.address %><br>
+  <b>City:</b>
+  <%= customer.city %> <br>
+  <b>Phone:</b>
+  <%= number_to_phone(customer.phone) %><br>
+  <b>Mobile:</b>
+  <%= number_to_phone(customer.mobile) %><br>
+  <%- end %>
+</p>
+
+  <div id="newlineitemform" style="float:right;display:<%= if @invoice.paid == true then "none" end %>;">
+Add new line item to invoice<br><br>
+
+<%- semantic_form_for @line_item, :url => invoice_line_items_path(@invoice.id) do |form| %>
+<%= form.inputs do %>
+<%= form.input :item, :as => :select, :collection => ["Labor", "Hardware", "Windows-Install", "iPhone", "Trip", "Other"] %>
+<%= form.input :name %>
+<%= form.input :cost %>
+<%= form.input :price %>
+<%= form.input :quantity %>
+<%- end %>
+
+<%= form.buttons %>
+<%- end %>
+
+  </div>
+
+  <b>Invoice Number:</b>
+  <%= @invoice.number %> <%= link_to 'Change', edit_invoice_path(@invoice.id), :class => "fancybutton" %>
+<%= link_to "PDF", invoice_path(@invoice.id,:pdf), :class => "fancybutton" %>
+<%= link_to "EMAIL", email_invoice_to_customer_path(@invoice.id,:pdf), :class => "fancybutton" %>
+<br>
+  <b>Location:</b>
+  <%= @invoice.category %>
+<br>
+  <b>Created by:</b>
+  <%= @invoice.employee %>
+<br>
+  <b>Invoice Date:</b>
+  <%= I18n.l @invoice.date %>
+<br>
+  <b>Is Paid:</b>
+  <%= if @invoice.paid == true then "Yes" else "Not yet" end %>
+<br>
+  <b>Date received:</b>
+  <%= @invoice.date_received %>
+<br>
+
+  <%= if @invoice.notax == true then "Non-Taxable Invoice" end %>
+
+  <b>tax:</b>
+  <%= @invoice.tax %>
+<br>
+  <b>Subtotal:</b>
+  <%= @invoice.subtotal %> <span style="background-color: red;"><%= if @invoice.subtotal == @invoice.getsubtotal then "" else "Need to Update" end %></span>
+
+<br>
+  <b>Total:</b>
+  <%= @invoice.total %>
+<br>
+  <b>Check/Visa/BizX Number:</b>
+  <%= @invoice.check_number %>
+<br>
+  <b>Tech Notes:</b>
+  <%= @invoice.note %>
+
+<h3 align=center>Invoice Summary</h3>
+
+ <style type="text/css"> 
+    <!--
+ 
+	.sumhead100 { width:100px;padding:0;float:left;}
+	.sumhead300 { width:300px;padding:0;float:left;}
+	.sumhead500 { width:500px;padding:0;float:left;}
+	
+    -->
+  </style> 
+
+<div style="width:20px;">&nbsp;</div>
+<div class="sumhead100"><strong>Item</div>
+<div class="sumhead300">Description</div>
+<div class="sumhead100">Quantity</div>
+<div class="sumhead100">Cost</strong></div>
+<div class="sumhead100">Price</strong></div>
+<div class="sumhead100">&nbsp</div>
+<br><br>
+
+<%- for line_items in @invoice.line_items %>
+<div style="width:20px;">&nbsp;</div>
+<div class="sumhead100"><%= line_items.item %>&nbsp;</div>
+<div class="sumhead300"><%= line_items.name %> &nbsp;</div>
+<div class="sumhead100"><%= line_items.quantity %> &nbsp;</div>
+<div class="sumhead100"><%= line_items.cost %>&nbsp;</div>
+<div class="sumhead100"><%= line_items.price %>&nbsp;</div>
+<div class="sumhead100"><%= link_to '<- Remove', invoice_line_item_path(@invoice.id, line_items.id), :method => :delete %></div>
+<%- end %>
+
+<p>&nbsp;</p>
+  <div id="subtotalbox" style="float:right;" >
+    Subtotal: 
+    <%= number_to_currency(@invoice.subtotal) %>
+    <br>
+    Tax: 
+    <%= number_to_currency(@invoice.tax) %>
+    <br>
+
+    <strong>Total: 
+    <%= number_to_currency(@invoice.total) %>
+    </strong>
+  </div>
+
+
+<div style="float: left;">
+ 
+<em>  <%= if current_user.group == "Admins" then link_to 'Delete Invoice', invoice_path(@invoice.id), :confirm => 'Are you sure?', :method => :delete end %></em>
+
+</div>
+<p>&nbsp;</p>
+<h2>Related Ticket Details</h2>
+<%- for related_ticket in @related_ticket %>
+<div class="sumhead100">ID: <%= related_ticket.id %> &nbsp;</div>
+<div class="sumhead300">Created At:<%= related_ticket.created_at %>&nbsp;</div>
+<div class="sumhead300">Subject: <%= related_ticket.subject %> &nbsp;</div>
+<div class="sumhead100">Location: <%= related_ticket.category %> &nbsp;</div>
+<div class="sumhead100">Problem Type: <%= related_ticket.problem_type %> &nbsp;</div>
+<%- end %>
+<%- for comments in @comments %>
+<div style="width:20px;">&nbsp</div>
+<div class="sumhead500"><b>Comment Made At:</b> <%= comments.created_at %> <b>by Tech:</b> <%= comments.tech %></div>
+<div class="hiddencomment" style="background-color: yellow;"> <%= if comments.hidden == true then "Hidden" else "" end %> </div>
+<div class="sumhead300"><b>Subject:</b> <%= comments.subject %>&nbsp;</div>
+<div class="sumhead500"><%= sanitize simple_format(auto_link(strip_tags comments.body)) %> </div>
+
+
+<%- end %>

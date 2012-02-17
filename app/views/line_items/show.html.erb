@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Number:</b>
+  <%= @invoice.number %>
+</p>
+
+<p>
+  <b>Paid:</b>
+  <%= @invoice.paid %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @invoice.date %>
+</p>
+
+<p>
+  <b>Date received:</b>
+  <%= @invoice.date_received %>
+</p>
+
+<p>
+  <b>Notax:</b>
+  <%= @invoice.notax %>
+</p>
+
+<p>
+  <b>Audit:</b>
+  <%= @invoice.audit %>
+</p>
+
+<p>
+  <b>Timestamp:</b>
+  <%= @invoice.timestamp %>
+</p>
+
+<p>
+  <b>Check number:</b>
+  <%= @invoice.check_number %>
+</p>
+
+<p>
+  <b>Saved:</b>
+  <%= @invoice.saved %>
+</p>
+<%- for line_items in @invoice.line_items %>
+<%= line_items.name %>
+
+<%- end %>
+
+
+<%= link_to 'Edit', edit_customers_invoice_path(@invoice) %> |
+<%= link_to 'Back', customers_invoices_path %>

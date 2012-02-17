@@ -1,0 +1,23 @@
+<h1>New invoice</h1>
+
+
+
+<%- semantic_form_for @invoice, :url => invoices_path,:customer_id.to_s => @invoice.customer_id.to_s, :ticket_id.to_s => @invoice.ticket_id.to_s, :category.to_s => @invoice.category do |form| %>
+<%= form.inputs do %>
+<%= form.input :number, :as => :hidden, :input_html => { :value => (@last_invoice.number.to_i + 1) } %>
+<h3>As Invoice# <%= (@last_invoice.number.to_i + 1) %></h3>
+
+<%= form.input :customer_id, :as => :hidden  %>
+
+<%= if params[:ticket_id] == nil then "" else form.input :ticket_id, :as => :radio, :collection => { @ticket.id.to_s => @ticket.id.to_s } end %>
+<%= if params[:ticket_id] == nil then "" else form.input :category, :as => :radio, :collection => { @ticket.category => @ticket.category } end %>
+<%- end %>
+
+<%= form.buttons %>
+<%- end %>
+cust
+<%= @customer.id %>
+ticket
+<%= if params[:ticket_id] == nil then "" else @ticket.id end %>
+
+last used number <%= @last_invoice.number %>

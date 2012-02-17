@@ -1,0 +1,76 @@
+<h3>Tickets</h3>
+<%= link_to 'New Ticket (find customer)', customers_path, :class => "fancybutton"  %>
+<p>
+  Sort by:
+  <%= sort_link @search, :category %> | 
+  <%= sort_link @search, :number %> |
+  <%= sort_link @search, :created_at %> |
+  <%= sort_link @search, :updated_at %> |
+  <%= sort_link @search, :status %>
+</p>
+</div>
+
+
+<br />
+<form accept-charset="UTF-8" action="/tickets" class="customer_search" id="customer_search" method="get">
+  <div style="float: left; width: 150px;">
+    <label for="search_First">Subject</label>
+    <input id="search_subject_contains" name="search[subject_contains]" size="7" type="text">
+  </div>
+  <div style="float: left; width: 150px;">
+    <label for="search_cat">Category</label>
+    <input id="search_category_contains" name="search[category_contains]" size="7" type="text">
+  </div>
+  <div style="float: left; width: 250px;">
+    <label for="search_problem_type">Problem Type</label>
+    <input id="search_problem_type_contains" name="search[problem_type_contains]" size="7" type="text">
+  </div>
+  <div style="float: left; width: 100px;">
+    <label for="search_">Status</label>
+    <input id="search_status_contains" name="search[status_contains]" size="7" type="text">
+  </div>
+  <div style="float: left; width: 100px;">
+    <label for="search_cat">Status isn't</label>
+    <input id="search_status_does_not_contain" name="search[status_does_not_contain]" value="Resolved" size="7" type="text">
+  </div>
+<p class="button"><input id="search_submit" name="commit" value="Search" type="submit"></p>
+</form>
+<p>&nbsp;</p>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Customer</th>
+	<th>Category</th>
+    <th>Subject</th>
+    <th>Created</th>
+    <th>Status</th>
+    <th>Problem type</th>
+    <th>Last Updated</th>
+    <th></th>
+
+  </tr>
+
+
+<% @tickets.each do |ticket| %>
+  <tr class="<%= cycle("even", "odd") %>">
+    <td><%= ticket.id %>&nbsp;</td>
+	<td><%= (ticket.customer.firstname + " " + ticket.customer.lastname) %>&nbsp;</td>
+    <td><%= ticket.category %>&nbsp;</td>
+    <td width="260px"><%= truncate(ticket.subject, :length => 32) %>&nbsp;</td>
+    <td><%= I18n.l ticket.created_at, :format => :short %>&nbsp;</td>
+    <td><%= truncate(ticket.status, :length => 11) %>&nbsp;</td>
+    <td><%= ticket.problem_type %>&nbsp;</td>
+    <td><%= distance_of_time_in_words(ticket.updated_at, Time.now) %>&nbsp;</td>
+    <td><%= link_to 'Show', ticket_path(ticket.id), :class => "fancybutton" %> </td>
+    <td><%= link_to 'Edit', edit_ticket_path(ticket.id) %></td>
+
+
+  </tr>
+<% end %>
+</table>
+<%= will_paginate(@tickets) %>
+
+<br>
+<br>
+

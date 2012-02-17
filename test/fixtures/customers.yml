@@ -1,0 +1,42 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  firstname: MyString
+  lastname: MyString
+  email: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  phone: MyString
+  mobile: MyString
+
+two:
+  firstname: MyString
+  lastname: MyString
+  email: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  phone: MyString
+  mobile: MyString
+
+# == Schema Information
+#
+# Table name: customers
+#
+#  id        :integer         primary key
+#  firstname :string(36)      not null
+#  lastname  :string(36)      not null
+#  email     :string(156)     not null
+#  address   :string(255)     not null
+#  city      :string(56)      not null
+#  state     :string(2)       not null
+#  zip       :string(10)      not null
+#  phone     :string(10)      not null
+#  mobile    :string(10)      not null
+#  latitude  :float
+#  longitude :float
+#
+
